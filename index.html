@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07040f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Zig Morph">
+  <meta name="description" content="Living, morphing video effects. Your videos never leave your device.">
+  <title>Zig Metamorphosis v3</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main id="home">
+    <p class="kicker">ZigFlames · v3.0.0</p>
+    <h1>Zig Metamorphosis</h1>
+    <p class="tag">Living, morphing video effects</p>
+
+    <label class="big-btn primary" for="file">
+      <span>Choose a video</span>
+      <small>From Photos, Files or the camera</small>
+    </label>
+    <input id="file" type="file" accept="video/*" hidden>
+
+    <form id="urlForm" class="url-row" autocomplete="off">
+      <input id="url" type="url" inputmode="url" placeholder="…or paste a direct video link (.mp4)" aria-label="Video link" spellcheck="false" autocapitalize="off">
+      <button type="submit" class="small-btn">Play</button>
+    </form>
+
+    <button id="demoBtn" class="big-btn ghost" type="button"><span>Try the demo clip</span></button>
+    <a id="bmLink" class="big-btn ghost" href="bookmarklet/"><span>Use it on other websites</span><small>Set up the Zig Morph bookmark</small></a>
+
+    <p id="homeMsg" class="msg" role="status" hidden></p>
+
+    <div class="downloads">
+      <p class="dl-title">Add-ons for a Mac or PC</p>
+      <p class="small">These are for a computer, not for iPhone. The old v2 add-ons stay as they are.</p>
+      <a class="big-btn ghost" href="downloads/zig-metamorphosis-v3-chrome.zip"><span>Download for Chrome or Brave</span><small>Unzip, then Load unpacked</small></a>
+      <a class="big-btn ghost" href="downloads/zig-metamorphosis-v3-firefox.xpi"><span>Download Full for Firefox</span><small>Temporary add-on on a newer computer</small></a>
+      <a class="big-btn ghost" href="downloads/zig-metamorphosis-v3-firefox-lite.xpi"><span>Download Lite for Firefox</span><small>Better for an older MacBook</small></a>
+    </div>
+
+    <ul class="notes">
+      <li>🔒 Your video stays on this device. Nothing is uploaded.</li>
+      <li id="installTip" hidden>📲 For true full screen and offline use: tap <b>Share</b> → <b>Add to Home Screen</b>.</li>
+      <li>⚠️ No flashing or strobing (every change is slower than once a second), but swirls and illusions can still feel intense. Stop if you feel dizzy or unwell.</li>
+    </ul>
+  </main>
+
+  <section id="stage" hidden>
+    <video id="video" playsinline webkit-playsinline loop preload="auto" disablepictureinpicture x-webkit-airplay="deny"></video>
+    <canvas id="canvas" aria-hidden="true"></canvas>
+    <button id="bigPlay" class="big-play" type="button" aria-label="Play" hidden></button>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <div id="ui" class="ui">
+      <div class="top">
+        <button id="backBtn" class="icon-btn" type="button" aria-label="Choose another video">←</button>
+        <div id="title" class="title"></div>
+        <button id="muteBtn" class="icon-btn" type="button" aria-label="Sound on/off">♪</button>
+        <button id="fsBtn" class="icon-btn" type="button" aria-label="Full screen" hidden>⛶</button>
+      </div>
+      <div class="transport">
+        <button id="playBtn" class="icon-btn" type="button" aria-label="Play/Pause">▶</button>
+        <span id="tCur" class="time">0:00</span>
+        <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Position">
+        <span id="tDur" class="time">0:00</span>
+      </div>
+      <div id="modes" class="chips" role="radiogroup" aria-label="Effect">
+        <button type="button" data-mode="cycle">Metamorphosis Cycle</button>
+        <button type="button" data-mode="liquid">Liquid Melt</button>
+        <button type="button" data-mode="dissolve">Dissolve &amp; Reform</button>
+        <button type="button" data-mode="refraction">Refraction</button>
+        <button type="button" data-mode="chroma">Chroma Morph</button>
+        <button type="button" data-mode="ripple">Ripple Pool</button>
+        <button type="button" data-mode="kaleido">Kaleido Bloom</button>
+        <button type="button" data-mode="smoke">Smoke Drift</button>
+        <button type="button" data-mode="mirror">Mirror Twin</button>
+        <button type="button" data-mode="shatter">Glass Shatter</button>
+        <button type="button" data-mode="breathe">Pulse Breathe</button>
+        <button type="button" data-mode="vision">Zig Vision</button>
+        <button type="button" data-mode="thick">Thick</button>
+        <button type="button" data-mode="brain">Brain Morph</button>
+      </div>
+      <p id="brainHint" class="hint" hidden>Keep your eyes on the red dot. When the swirl fades, the video will seem to move the other way.</p>
+      <p id="fallbackNote" class="hint warn" hidden></p>
+      <div class="sliders">
+        <label>Intensity <input id="intensity" type="range" min="0" max="100"></label>
+        <label>Fine speed <input id="speed" type="range" min="0" max="100"></label>
+        <label id="adaptRow" hidden>Stare time <span id="adaptVal"></span><input id="adapt" type="range" min="10" max="60"></label>
+      </div>
+      <div class="seg" id="pace" role="radiogroup" aria-label="Speed">
+        <button type="button" data-pace="slow">Slow</button>
+        <button type="button" data-pace="normal">Normal</button>
+        <button type="button" data-pace="fast">Fast</button>
+        <button type="button" data-pace="turbo">Turbo</button>
+      </div>
+      <div class="seg" id="perf" role="radiogroup" aria-label="Performance">
+        <button type="button" data-perf="low">Battery saver</button>
+        <button type="button" data-perf="medium">Balanced</button>
+        <button type="button" data-perf="high">Sharp</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

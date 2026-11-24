@@ -1,0 +1,51 @@
+/* Zig Metamorphosis v3.0.0 — morph page */
+:root { --bg:#07040f; --panel:#141025; --text:#f3f0ff; --muted:#9a93c2; --accent:#b45cff; --accent2:#2fd6ff; --danger:#ff8a8a; }
+* { box-sizing: border-box; }
+html, body { margin:0; min-height:100%; background:var(--bg); color:var(--text);
+  font:16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+#home { max-width: 28rem; margin: 0 auto; padding: 2.4rem 1.2rem 3rem; }
+.kicker { color:var(--accent2); letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; margin:0 0 .4rem; }
+h1 { font-size: 2rem; margin:0 0 .3rem; letter-spacing:.01em; }
+.tag { color:var(--muted); margin:0 0 1.6rem; }
+.big-btn { display:block; width:100%; text-align:left; margin:0 0 .7rem; padding:1rem 1.1rem; border-radius:14px;
+  border:1px solid #2c2748; background:var(--panel); color:var(--text); text-decoration:none; font:inherit; cursor:pointer; }
+.big-btn.primary { background:linear-gradient(90deg,var(--accent),#6a4dff); border:0; font-weight:650; }
+.big-btn small { display:block; font-size:.8rem; opacity:.85; font-weight:400; margin-top:.15rem; }
+.big-btn.ghost { background:transparent; }
+.url-row { display:flex; gap:.5rem; margin:0 0 .7rem; }
+.url-row input { flex:1; min-width:0; padding:.75rem .8rem; border-radius:12px; border:1px solid #2c2748;
+  background:#0b0a12; color:var(--text); font:inherit; }
+.small-btn { padding:.75rem 1rem; border:0; border-radius:12px; background:#2c2748; color:var(--text); font:inherit; cursor:pointer; }
+.notes { color:var(--muted); font-size:.9rem; padding-left:1.1rem; }
+.msg { color:var(--danger); margin:0 0 1rem; }
+#stage { position:fixed; inset:0; background:#000; }
+#stage video, #stage canvas { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+#stage canvas { pointer-events:none; }
+.ui { position:absolute; left:0; right:0; bottom:0; padding: .6rem 0.8rem calc(.8rem + env(safe-area-inset-bottom));
+  background:linear-gradient(transparent, rgba(7,4,15,.92) 28%); }
+.top, .transport { display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; }
+.title { flex:1; font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.icon-btn { width:2.2rem; height:2.2rem; border:0; border-radius:50%; background:#2c2748; color:#fff; font:inherit; cursor:pointer; }
+.time { font-variant-numeric:tabular-nums; font-size:.8rem; color:var(--muted); }
+.transport input[type=range] { flex:1; }
+.chips { display:flex; gap:.4rem; overflow-x:auto; padding:.2rem 0 .5rem; -webkit-overflow-scrolling:touch; }
+.chips button, .seg button { flex:none; border:1px solid #2c2748; background:#141025; color:var(--text);
+  border-radius:999px; padding:.35rem .7rem; font:inherit; font-size:.8rem; cursor:pointer; }
+.chips button[aria-checked="true"], .seg button[aria-checked="true"] {
+  background:linear-gradient(90deg,var(--accent),var(--accent2)); border-color:transparent; color:#fff; font-weight:650; }
+.seg { display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem; margin:.4rem 0; }
+.sliders { display:grid; gap:.35rem; margin:.4rem 0; font-size:.8rem; color:var(--muted); }
+.sliders input { width:100%; }
+.hint { font-size:.8rem; color:var(--muted); margin:.3rem 0; }
+.hint.warn { color:#ffd39a; }
+.toast { position:absolute; top:calc(.8rem + env(safe-area-inset-top)); left:50%; transform:translateX(-50%);
+  background:#17142a; border:1px solid #2c2748; border-radius:10px; padding:.5rem .8rem; font-size:.85rem; max-width:90%; }
+.big-play { position:absolute; left:50%; top:45%; transform:translate(-50%,-50%); width:4.5rem; height:4.5rem;
+  border:0; border-radius:50%; background:rgba(180,92,255,.9); color:#fff; font-size:1.6rem; cursor:pointer; }
+.big-play::before { content:"▶"; }
+body.playing #home { display:none; }
+
+.downloads { margin: 1.4rem 0 1rem; }
+.dl-title { margin: 0 0 .3rem; font-weight: 650; }
+.downloads .small { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
