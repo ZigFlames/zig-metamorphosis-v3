@@ -1,20 +1,17 @@
 Zig Metamorphosis v3.0.0 bookmark pin
 =====================================
-The default bookmark is Zig Morph Max (see max.txt). It is self-contained.
-It does not load any remote file, so a later site or GitHub change cannot
-silently swap the effect. After a future rebuild, recopy this Max code.
+The default bookmark is Zig Morph Max (see max.txt or the setup page).
+It is self-contained. It does not load any remote file, so a later site
+or GitHub change cannot silently swap the effect. After a future rebuild,
+recopy this Max code.
 
-The short Loader bookmark (loader.txt) is optional. It is pinned to a
-specific file version, not to @main:
+The short Loader bookmark is optional. It is pinned to a specific file
+version, not to @main:
 
   https://zigflames.com/zig-metamorphosis-v3/bookmarklet/morph.js?v=3.0.0
 
-It will only work after v3 is published to that path (not done in this
-build). At publish time, add a second fallback that is also pinned to the
-exact Git commit SHA, for example:
+Fallback, pinned to the exact published commit of morph.js:
 
-  https://cdn.jsdelivr.net/gh/ZigFlames/<repo>@<COMMIT_SHA>/bookmarklet/morph.js
+  https://cdn.jsdelivr.net/gh/ZigFlames/zig-metamorphosis-v3@b83b43d1ae42a4bdf1cf7d06008f166790be72c5/bookmarklet/morph.js
 
-Do not use @main. Record the SHA here when you publish:
-
-  PUBLISH_COMMIT=unpublished
+PUBLISH_COMMIT=b83b43d1ae42a4bdf1cf7d06008f166790be72c5
